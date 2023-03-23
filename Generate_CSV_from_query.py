@@ -1,3 +1,4 @@
+import pyscript as pyscript
 import pysmashgg
 import json
 import pandas as pd
@@ -16,8 +17,7 @@ def print_hi(name):
     print(f'Hi, {name}')
 
 
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def do_everything():
     with open('TOKEN_STARTGG.txt', 'r') as file:
         token = file.read().rstrip()
     smash = pysmashgg.SmashGG(token, True)
@@ -30,7 +30,7 @@ if __name__ == '__main__':
         sets = smash.tournament_show_sets("let-s-play-ii", "1v1-smash-ultimate", i)
 
         for set in sets:
-            print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
+            #print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
             fullSetsInTournamentEvent.append(set)
             fullTextRound.append(set['fullRoundText'])
             fullEntrant1Name.append(set['entrant1Name'])
@@ -40,8 +40,15 @@ if __name__ == '__main__':
     data_lp = {"Time": fullTextRound, "HomeTeam": fullEntrant1Name, "AwayTeam": fullEntrant2Name}
     df_data_lp = pd.DataFrame(data_lp)
     df_data_lp.to_csv("data_lp.csv", sep=';', encoding='utf-8', index=False)
-    # parsed = json.loads(sets)
-    # print(json.dumps(parsed, indent=4))
+
+
+def get_top_8():
+    return True
+
+if __name__ == '__main__':
+    do_everything()
+# parsed = json.loads(sets)
+# print(json.dumps(parsed, indent=4))
 
 # {
 #   "phaseId": 1308067,
