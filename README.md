@@ -19,11 +19,12 @@ StartGG and generate a CSV of either the matches to be played or the TOP 8 of a 
 ## How to setup
 
 ### Prerequisites
-
-Clone the repo using ```git clone https://github.com/Atomme1/StartGG_queries.git```
-- Python 3.8+
+You need to have a Python 3.8+ (i did not test it for older version)\
+Clone the repo using ```git clone https://github.com/Atomme1/StartGG_queries.git``` \
+Then use ```pip install -r requirements.txt``` to install
 - Flask
 - PySmashGG
+- Pandas
 
 ### Installing
 Step-by-step instructions on how to install this project.
