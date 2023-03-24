@@ -15,7 +15,7 @@ def home():
 
 @app.route('/get_csv', methods=['POST', 'GET'])
 def get_csv():
-    do_everything()
+    get_csv_of_matches()
     return render_template("testDocks.html")
 
 

@@ -16,12 +16,23 @@ StartGG and generate a CSV of either the matches to be played or the TOP 8 of a 
 ![Screenshot](image_for_readMe/overview1.png)
 ![Screenshot](image_for_readMe/overview2.png)
 
+## How to setup
+
+### Prerequisites
+
+Clone the repo using ```git clone https://github.com/Atomme1/StartGG_queries.git```
+- Python 3.8+
+- Flask
+- PySmashGG
+
+### Installing
+Step-by-step instructions on how to install this project.
 
 ## Useful links
 
 The main librairy used is PySmashGG :https://pypi.org/project/pysmashgg/
 
 The external software I use for keeping up with the score of the players: 
-https://obsproject.com/forum/resources/another-scoreboard-application.827/
+https://obsproject.com/forum/resources/another-scoreboard-application.827/ \
 This simple scoreboard application allows me to load a CSV of the matches to be played.
 With this 

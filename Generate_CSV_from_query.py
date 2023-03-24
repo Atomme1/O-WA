@@ -1,6 +1,4 @@
-import pyscript as pyscript
 import pysmashgg
-import json
 import pandas as pd
 
 
@@ -17,7 +15,7 @@ def print_hi(name):
     print(f'Hi, {name}')
 
 
-def do_everything():
+def get_csv_of_matches():
     with open('TOKEN_STARTGG.txt', 'r') as file:
         token = file.read().rstrip()
     smash = pysmashgg.SmashGG(token, True)
@@ -46,14 +44,4 @@ def get_top_8():
     return True
 
 if __name__ == '__main__':
-    do_everything()
-# parsed = json.loads(sets)
-# print(json.dumps(parsed, indent=4))
-
-# {
-#   "phaseId": 1308067,
-#   "page": 1,
-#   "perPage": 15,
-#   "tournamentSlug": "let-s-play-ii",
-#   "eventSlug": "1v1-smash-ultimate"
-# }
+    get_csv_of_matches()
