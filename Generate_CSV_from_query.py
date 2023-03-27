@@ -24,15 +24,17 @@ def get_csv_of_matches():
     fullTextRound = []
     fullEntrant1Name = []
     fullEntrant2Name = []
+
     for i in range(0, 10):
         sets = smash.tournament_show_sets("let-s-play-ii", "1v1-smash-ultimate", i)
 
         for set in sets:
-            #print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
+            # print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
             fullSetsInTournamentEvent.append(set)
             fullTextRound.append(set['fullRoundText'])
             fullEntrant1Name.append(set['entrant1Name'])
             fullEntrant2Name.append(set['entrant2Name'])
+            print(set)
     print(len(fullSetsInTournamentEvent))
 
     data_lp = {"Time": fullTextRound, "HomeTeam": fullEntrant1Name, "AwayTeam": fullEntrant2Name}
@@ -42,6 +44,7 @@ def get_csv_of_matches():
 
 def get_top_8():
     return True
+
 
 if __name__ == '__main__':
     get_csv_of_matches()

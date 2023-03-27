@@ -8,6 +8,11 @@
 </head>
 <section class="header">
     <divc class="title-wrapper">
+    {% for your_list_element in your_list %}
+          <p>{{ your_list_element }} </p>
+      {% endfor %}
+
+
 
         <h1 class="top-title">First button is for generating a full CSV of matches</h1>
         <form class="center" action="/get_csv" method="POST">
@@ -26,7 +31,7 @@
             </div>
         </form>
 
-        <h1 class="top-title">Thirs button is for switching players matches</h1>
+        <h1 class="top-title">Third button is for switching players matches</h1>
 
         <form class="center" action="/swap_name_OBS" method="POST">
 

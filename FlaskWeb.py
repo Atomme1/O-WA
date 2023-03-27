@@ -1,36 +1,45 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 import test
 from Generate_CSV_from_query import *
 from OBS_websocket_commands import do_swap_of_players
+import pandas as pd
+import time
 
 app = Flask(__name__)
 
+your_list = [1, 2, 3, 4]
 
-def printYoupi():
-    a = "printYoupi"
+
+def load_data_from_CSV():
+    df_data_lp = pd.read_csv("data_lp.csv")
+    matchs = df_data_lp.values.tolist()
+    return matchs
 
 
 @app.route('/')
 def home():
-    return render_template("testDocks.html")
+    matchs = load_data_from_CSV()
+    return render_template('testDocks.html', your_list=matchs)
+    # return render_template("testDocks.html")
 
 
 @app.route('/get_csv', methods=['POST', 'GET'])
 def get_csv():
     get_csv_of_matches()
-    return render_template("testDocks.html")
+    time.sleep(10)
+    return redirect(url_for("home"))
 
 
 @app.route('/get_top_8', methods=['POST', 'GET'])
 def get_top8():
     get_top_8()
-    return render_template("testDocks.html")
+    return redirect(url_for("home"))
 
 
 @app.route('/swap_name_OBS', methods=['POST', 'GET'])
 def swap_name_OBS():
     do_swap_of_players()
-    return render_template("testDocks.html")
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":

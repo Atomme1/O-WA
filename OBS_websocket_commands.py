@@ -31,6 +31,14 @@ def swap_text_sources(ws, source1_name, source2_name):
 # ws = obswebsocket.obsws(IPv4, 4444, password)
 # ws.connect()
 
+def rename_players(source1_name, source2_name, source1_text, source2_text):
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source1_name, text=source2_text))
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source2_name, text=source1_text))
+    ws.disconnect()
+
 def do_swap_of_players():
     # Set the contents of a text file in OBS Studio
     ws = obswebsocket.obsws(IPv4, 4444, password)
