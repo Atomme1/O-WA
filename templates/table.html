@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('tr').click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+                var Time = $(this).find('td:first').text();
+                var HomeTeam = $(this).find('td:nth-child(2)').text();
+                var AwayTeam = $(this).find('td:last').text();
+                $('#selected_row').val(Time + ',' + HomeTeam + ',' + AwayTeam);
+                $('#match_field').val(Time);
+                $('#player_1_field').val(HomeTeam);
+                $('#player_2_field').val(AwayTeam);
+                $('#my_form').submit();
+            });
+        });
+    </script>
+</head>
+<body>
+<form id="my_form" method="POST">
+    <input type="hidden" id="selected_row" name="selected_row">
+    <table>
+        <tr>
+            <th>Match</th>
+            <th>player_1</th>
+            <th>player_2</th>
+        </tr>
+        {% for item in data %}
+            <tr>
+                <td>{{ item['Time'] }}</td>
+                <td>{{ item['HomeTeam'] }}</td>
+                <td>{{ item['AwayTeam'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <label for="match_field">Match:</label>
+    <input type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>
+
+    <label for="player_1_field">Player 1</label>
+    <input type="text" id="player_1_field" name="player_1_field" value="{{ selected_player_1 }}"><br><br>
+
+    <label for="player_2_field">Player 2</label>
+    <input type="text" id="player_2_field" name="player_2_field" value="{{ selected_player_2 }}"><br><br>
+</form>
+</body>
+</html>
