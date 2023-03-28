@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
     <title>Table</title>
+    <link rel="stylesheet" href="../static/styles/TableStyleSheet.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -20,13 +22,33 @@
     </script>
 </head>
 <body>
+<div style="text-align: left;">
+
+    <label for="match_field" class="top-title">Match : </label>
+    <input class="top-title" type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>
+
+    <label for="player_1_field" class="top-title">Player 1 : </label>
+    <input class="top-title" type="text" id="player_1_field" name="player_1_field"
+           value="{{ selected_player_1 }}"><br><br>
+
+    <label for="player_2_field" class="top-title">Player 2 : </label>
+    <input class="top-title" type="text" id="player_2_field" name="player_2_field"
+           value="{{ selected_player_2 }}"><br><br>
+</div>
+<div>
+<form class="center" action="/get_top_8" method="POST">
+
+        <input type="Submit" value="GENERATE top 8" class="button-76">
+    </form>
+</div>
+
 <form id="my_form" method="POST">
     <input type="hidden" id="selected_row" name="selected_row">
     <table>
         <tr>
             <th>Match</th>
-            <th>player_1</th>
-            <th>player_2</th>
+            <th>Player 1</th>
+            <th>Player 2</th>
         </tr>
         {% for item in data %}
             <tr>
@@ -36,15 +58,6 @@
             </tr>
         {% endfor %}
     </table>
-
-    <label for="match_field">Match:</label>
-    <input type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>
-
-    <label for="player_1_field">Player 1</label>
-    <input type="text" id="player_1_field" name="player_1_field" value="{{ selected_player_1 }}"><br><br>
-
-    <label for="player_2_field">Player 2</label>
-    <input type="text" id="player_2_field" name="player_2_field" value="{{ selected_player_2 }}"><br><br>
 </form>
 </body>
 </html>

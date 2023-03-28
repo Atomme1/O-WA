@@ -5,6 +5,7 @@ import json
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 def load_data_from_CSV_2_DICT():
