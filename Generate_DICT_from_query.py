@@ -1,5 +1,6 @@
 import pysmashgg
 import pandas as pd
+import pickle
 
 
 # This code allows you to generate a CSV from pysmashgg functions query and use this CSV inside the ScoreBoard App,
@@ -15,7 +16,7 @@ def print_hi(name):
     print(f'Hi, {name}')
 
 
-def get_csv_of_matches():
+def get_pkl_of_matches():
     with open('TOKEN_STARTGG.txt', 'r') as file:
         token = file.read().rstrip()
     smash = pysmashgg.SmashGG(token, True)
@@ -37,14 +38,17 @@ def get_csv_of_matches():
             print(set)
     print(len(fullSetsInTournamentEvent))
 
-    data_lp = {"Time": fullTextRound, "HomeTeam": fullEntrant1Name, "AwayTeam": fullEntrant2Name}
+    data_lp = {"Match": fullTextRound, "Player_1": fullEntrant1Name, "Player_2": fullEntrant2Name}
     df_data_lp = pd.DataFrame(data_lp)
-    df_data_lp.to_csv("data_lp.csv", sep=';', encoding='utf-8', index=False)
+    # df_data_lp.to_csv("data_lp.csv", sep=';', encoding='utf-8', index=False)
+    matchs = df_data_lp.to_dict(orient='records')
 
+    with open('data_lp.pkl', 'wb') as f:
+        pickle.dump(matchs, f)
 
 def get_top_8():
     return True
 
 
 if __name__ == '__main__':
-    get_csv_of_matches()
+    get_pkl_of_matches()

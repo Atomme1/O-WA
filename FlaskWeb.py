@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 import test
-from Generate_CSV_from_query import *
-from OBS_websocket_commands import do_swap_of_players
+from Generate_DICT_from_query import *
+from OBS_websocket_commands import obs_do_swap_of_players
 import pandas as pd
 import time
 
@@ -38,7 +38,7 @@ def get_top8():
 
 @app.route('/swap_name_OBS', methods=['POST', 'GET'])
 def swap_name_OBS():
-    do_swap_of_players()
+    obs_do_swap_of_players()
     return redirect(url_for("home"))
 
 

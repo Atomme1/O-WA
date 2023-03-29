@@ -9,13 +9,13 @@
         $(document).ready(function () {
             $('tr').click(function () {
                 $(this).addClass('selected').siblings().removeClass('selected');
-                var Time = $(this).find('td:first').text();
-                var HomeTeam = $(this).find('td:nth-child(2)').text();
-                var AwayTeam = $(this).find('td:last').text();
-                $('#selected_row').val(Time + ',' + HomeTeam + ',' + AwayTeam);
-                $('#match_field').val(Time);
-                $('#player_1_field').val(HomeTeam);
-                $('#player_2_field').val(AwayTeam);
+                var Match = $(this).find('td:first').text();
+                var Player_1 = $(this).find('td:nth-child(2)').text();
+                var Player_2 = $(this).find('td:last').text();
+                $('#selected_row').val(Match + ',' + Player_1 + ',' + Player_2);
+                $('#match_field').val(Match);
+                $('#player_1_field').val(Player_1);
+                $('#player_2_field').val(Player_2);
                 $('#my_form').submit();
             });
         });
@@ -36,9 +36,9 @@
            value="{{ selected_player_2 }}"><br><br>
 </div>
 <div>
-<form class="center" action="/get_top_8" method="POST">
+<form class="center" action="/confirm_next_game" method="POST">
 
-        <input type="Submit" value="GENERATE top 8" class="button-76">
+        <input type="Submit" value="CONFIRM NEXT GAME" class="button-76">
     </form>
 </div>
 
@@ -52,9 +52,9 @@
         </tr>
         {% for item in data %}
             <tr>
-                <td>{{ item['Time'] }}</td>
-                <td>{{ item['HomeTeam'] }}</td>
-                <td>{{ item['AwayTeam'] }}</td>
+                <td>{{ item['Match'] }}</td>
+                <td>{{ item['Player_1'] }}</td>
+                <td>{{ item['Player_2'] }}</td>
             </tr>
         {% endfor %}
     </table>

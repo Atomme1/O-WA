@@ -1,25 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from OBS_websocket_commands import do_swap_of_players, rename_players
+from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game
 import pandas as pd
-import json
+import pickle
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-def load_data_from_CSV_2_DICT():
-    df_data_lp = pd.read_csv("data_lp.csv", sep=';')
-    #matchs = df_data_lp.values.to
-    matchs = df_data_lp.to_dict(orient='records')
-
+def load_data_from_PKL_2_DICT():
+    with open('data_lp.pkl', 'rb') as f:
+        matchs = pickle.load(f)
     return matchs
+
+
+matchs = load_data_from_PKL_2_DICT()
 
 
 @app.route('/table', methods=['GET', 'POST'])
 def show_table():
-    matchs = load_data_from_CSV_2_DICT()
-
     if request.method == 'POST':
         # Get row from table in html
         selected_row = request.form['selected_row']
@@ -34,7 +33,14 @@ def show_table():
     _selected_match = session.get('selected_match', '')
     _selected_player_1 = session.get('selected_player_1', '')
     _selected_player_2 = session.get('selected_player_2', '')
-    rename_players("textTestAPI", "textTestAPI_2", _selected_player_1, _selected_player_2)
+    # rename_players("textTestAPI", "textTestAPI_2", _selected_player_1, _selected_player_2)
 
     return render_template('table.html', data=matchs, selected_match=_selected_match,
                            selected_player_1=_selected_player_1, selected_player_2=_selected_player_2)
+
+
+@app.route('/confirm_next_game', methods=['POST', 'GET'])
+def confirm_next_game():
+    obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
+
+    return redirect(url_for("show_table"))

@@ -6,9 +6,14 @@ import json
 with open('TOKEN_OBS_WEB-SOCKET.txt', 'r') as file:
     password = file.read().rstrip()
 
-
 with open('IPV4.txt', 'r') as file:
     IPv4 = file.read().rstrip()
+
+## VARIABLE
+
+_source1_name = "textTestAPI"
+_source2_name = "textTestAPI_2"
+_source3_name = "textTournoiAPI"
 
 
 def swap_text_sources(ws, source1_name, source2_name):
@@ -39,16 +44,26 @@ def rename_players(source1_name, source2_name, source1_text, source2_text):
     ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source2_name, text=source1_text))
     ws.disconnect()
 
-def do_swap_of_players():
+
+def rename_players_and_match(source1_name, source2_name, source3_name, source1_text, source2_text, source3_text):
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source1_name, text=source2_text))
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source2_name, text=source1_text))
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source3_name, text=source3_text))
+    ws.disconnect()
+
+
+def obs_do_swap_of_players():
     # Set the contents of a text file in OBS Studio
     ws = obswebsocket.obsws(IPv4, 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
         # print(scenes)
-        source1_name = "textTestAPI"
-        source2_name = "textTestAPI_2"
-        swap_text_sources(ws, source1_name, source2_name)
+
+        swap_text_sources(ws, _source1_name, _source2_name)
 
         # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
 
@@ -57,7 +72,19 @@ def do_swap_of_players():
     # Disconnect from the WebSocket server
     ws.disconnect()
 
-# client.call(requests.SetSourceSettings(
-#                     sourceName="source-name",
-#                     sourceSettings={"file": file_name}
-#                     ))
+
+def obs_confirm_next_game(source1_text, source2_text, source3_text):
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        rename_players_and_match(_source1_name, _source2_name, _source3_name, source1_text, source2_text, source3_text)
+
+        # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
