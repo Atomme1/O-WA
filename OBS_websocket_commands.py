@@ -14,6 +14,8 @@ with open('IPV4.txt', 'r') as file:
 _source1_name = "textTestAPI"
 _source2_name = "textTestAPI_2"
 _source3_name = "textTournoiAPI"
+_source4_name = "player_1_score"
+_source5_name = "player_2_score"
 
 
 def swap_text_sources(ws, source1_name, source2_name):
@@ -49,9 +51,85 @@ def rename_players_and_match(source1_name, source2_name, source3_name, source1_t
     ws = obswebsocket.obsws(IPv4, 4444, password)
     ws.connect()
 
-    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source1_name, text=source2_text))
-    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source2_name, text=source1_text))
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source1_name, text=source1_text))
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source2_name, text=source2_text))
     ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source3_name, text=source3_text))
+    ws.disconnect()
+
+def add_1_player(ws, source_name):
+    return True
+
+
+def minus_1_player(ws, source_name):
+    return True
+
+def obs_add_1_player1():
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        add_1_player(ws, _source4_name)
+
+        # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
+
+
+def obs_add_1_player2():
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        add_1_player(ws, _source5_name)
+
+        # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
+def obs_minus_1_player1():
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        minus_1_player(ws, _source4_name)
+
+        # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
+def obs_minus_1_player2():
+    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        minus_1_player(ws, _source5_name)
+
+        # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
     ws.disconnect()
 
 

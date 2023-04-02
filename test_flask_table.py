@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game
+from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player1
 import pandas as pd
 import pickle
 
@@ -23,8 +23,8 @@ def show_table():
         # Get row from table in html
         selected_row = request.form['selected_row']
         # Split the selected row data into name and age
-        Match, Selected_player_1, Selected_player_2 = selected_row.split(',')
-        # Store the name and age in the session
+        Match, Selected_player_1, Selected_player_2 = selected_row.split(';;')
+        # Store the match, player1name and player2name in the session
         session['selected_match'] = Match
         session['selected_player_1'] = Selected_player_1
         session['selected_player_2'] = Selected_player_2
@@ -40,6 +40,13 @@ def show_table():
 
 
 @app.route('/confirm_next_game', methods=['POST', 'GET'])
+def confirm_next_game():
+    obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
+
+    return redirect(url_for("show_table"))
+
+
+@app.route('/add_1_player1', methods=['POST', 'GET'])
 def confirm_next_game():
     obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
 

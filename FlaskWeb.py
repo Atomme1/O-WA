@@ -7,7 +7,6 @@ import time
 
 app = Flask(__name__)
 
-your_list = [1, 2, 3, 4]
 
 
 def load_data_from_CSV():
@@ -25,7 +24,7 @@ def home():
 
 @app.route('/get_csv', methods=['POST', 'GET'])
 def get_csv():
-    get_csv_of_matches()
+    get_pkl_of_matches()
     time.sleep(10)
     return redirect(url_for("home"))
 
