@@ -27,7 +27,7 @@ def get_pkl_of_matches():
     fullEntrant2Name = []
 
     for i in range(0, 10):
-        sets = smash.tournament_show_sets("let-s-play-ii", "1v1-smash-ultimate", i)
+        sets = smash.tournament_show_sets("let-s-play-iii", "1v1-smash-ultimate", i)
 
         for set in sets:
             # print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
@@ -35,16 +35,17 @@ def get_pkl_of_matches():
             fullTextRound.append(set['fullRoundText'])
             fullEntrant1Name.append(set['entrant1Name'])
             fullEntrant2Name.append(set['entrant2Name'])
-            print(set)
+            #print(set)
     print(len(fullSetsInTournamentEvent))
 
     data_lp = {"Match": fullTextRound, "Player_1": fullEntrant1Name, "Player_2": fullEntrant2Name}
     df_data_lp = pd.DataFrame(data_lp)
     # df_data_lp.to_csv("data_lp.csv", sep=';', encoding='utf-8', index=False)
     matchs = df_data_lp.to_dict(orient='records')
-
-    with open('data_lp.pkl', 'wb') as f:
+    print(df_data_lp)
+    with open('data_lp_3.pkl', 'wb') as f:
         pickle.dump(matchs, f)
+
 
 def get_top_8():
     return True

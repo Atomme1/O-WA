@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player1
 import pandas as pd
 import pickle
+from Generate_DICT_from_query import *
+import time
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -9,16 +11,16 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 def load_data_from_PKL_2_DICT():
-    with open('data_lp.pkl', 'rb') as f:
+    with open('data_lp_3.pkl', 'rb') as f:
         matchs = pickle.load(f)
     return matchs
 
 
-matchs = load_data_from_PKL_2_DICT()
 
 
 @app.route('/table', methods=['GET', 'POST'])
 def show_table():
+    matchs = load_data_from_PKL_2_DICT()
     if request.method == 'POST':
         # Get row from table in html
         selected_row = request.form['selected_row']
@@ -46,8 +48,21 @@ def confirm_next_game():
     return redirect(url_for("show_table"))
 
 
-@app.route('/add_1_player1', methods=['POST', 'GET'])
-def confirm_next_game():
-    obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
-
+@app.route('/swap_name_OBS', methods=['POST', 'GET'])
+def swap_name_OBS():
+    obs_do_swap_of_players()
     return redirect(url_for("show_table"))
+
+
+@app.route('/get_csv', methods=['POST', 'GET'])
+def get_csv():
+    get_pkl_of_matches()
+    time.sleep(10)
+    return redirect(url_for("show_table"))
+
+
+# @app.route('/add_1_player1', methods=['POST', 'GET'])
+# def confirm_next_game():
+#     obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
+#
+#     return redirect(url_for("show_table"))

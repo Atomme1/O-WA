@@ -10,12 +10,19 @@ with open('IPV4.txt', 'r') as file:
     IPv4 = file.read().rstrip()
 
 ## VARIABLE
+"""
+You are forced to  e x p l i c i t l y  write down every source of OBS you will modify
 
-_source1_name = "textTestAPI"
-_source2_name = "textTestAPI_2"
-_source3_name = "textTournoiAPI"
-_source4_name = "player_1_score"
-_source5_name = "player_2_score"
+To make things things easier for you, every functions in this project are not connected to each other
+So
+There is always a try catch with the obs part in case things go bad :eyes:
+"""
+
+_source1_name = "JOUEUR_GAUCHE"
+_source2_name = "JOUEUR_DROITE"
+_source3_name = "ROUND_TOURNOI"
+_source4_name = "SCORE_GAUCHE"
+_source5_name = "SCORE_DROITE"
 
 
 def swap_text_sources(ws, source1_name, source2_name):
@@ -56,12 +63,22 @@ def rename_players_and_match(source1_name, source2_name, source3_name, source1_t
     ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source3_name, text=source3_text))
     ws.disconnect()
 
-def add_1_player(ws, source_name):
+
+def add_1_player(ws, source_name: str, ):
+    source_props = ws.call(obswebsocket.requests.GetTextGDIPlusProperties(source=source_name))
+    source_text = str(int(source_props.datain['text']) + 1)
+    print("Plus 1" + source_text)
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source_name, text=source_text))
     return True
 
 
 def minus_1_player(ws, source_name):
+    source_props = ws.call(obswebsocket.requests.GetTextGDIPlusProperties(source=source_name))
+    source_text = str(int(source_props.datain['text']) + 1)
+    print("Plus 1" + source_text)
+    ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source_name, text=source_text))
     return True
+
 
 def obs_add_1_player1():
     ws = obswebsocket.obsws(IPv4, 4444, password)
@@ -78,8 +95,6 @@ def obs_add_1_player1():
         pass
     # Disconnect from the WebSocket server
     ws.disconnect()
-
-
 
 
 def obs_add_1_player2():

@@ -9,7 +9,7 @@
         $(document).ready(function () {
             $('tr').click(function () {
                 $(this).addClass('selected').siblings().removeClass('selected');
-                var Match= $(this).find('td:first').text();
+                var Match = $(this).find('td:first').text();
                 var Player_1 = $(this).find('td:nth-child(2)').text();
                 var Player_2 = $(this).find('td:last').text();
                 $('#selected_row').val(Match + ';;' + Player_1 + ';;' + Player_2);
@@ -35,13 +35,14 @@
     <input class="top-title" type="text" id="player_2_field" name="player_2_field"
            value="{{ selected_player_2 }}"><br><br>
 </div>
-<div>
-<form class="center" action="/confirm_next_game" method="POST">
 
+    <form class="center" action="/confirm_next_game" method="POST" style="display: inline-block">
         <input type="Submit" value="CONFIRM NEXT GAME" class="button-76">
     </form>
-</div>
 
+    <form class="center" action="/swap_name_OBS" method="POST" style="display: inline-block">
+        <input type="Submit" value="SWAP players" class="button-76">
+    </form>
 <form id="my_form" method="POST">
     <input type="hidden" id="selected_row" name="selected_row">
     <table>
@@ -58,6 +59,23 @@
             </tr>
         {% endfor %}
     </table>
+</form>
+
+<h1 class="top-title">First button is for generating a full Dict of matches</h1>
+<form class="center" action="/get_csv" method="POST">
+
+    <div style="text-align: center;">
+        <input type="Submit" value="GET SETS" class="button-76">
+    </div>
+
+</form>
+
+<h1 class="top-title">Second button is for switching players matches</h1>
+<form class="center" action="/swap_name_OBS" method="POST">
+
+    <div style="text-align: center;">
+        <input type="Submit" value="SWAP players" class="button-76">
+    </div>
 </form>
 </body>
 </html>
