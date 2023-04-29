@@ -27,22 +27,47 @@
     <label for="match_field" class="top-title">Match : </label>
     <input class="top-title" type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>
 
-    <label for="player_1_field" class="top-title">Player 1 : </label>
-    <input class="top-title" type="text" id="player_1_field" name="player_1_field"
-           value="{{ selected_player_1 }}"><br><br>
+    <div class="align_forms_label">
 
-    <label for="player_2_field" class="top-title">Player 2 : </label>
-    <input class="top-title" type="text" id="player_2_field" name="player_2_field"
-           value="{{ selected_player_2 }}"><br><br>
+        <label for="player_1_field" class="top-title">Player 1 : </label>
+        <input class="top-title" type="text" id="player_1_field" name="player_1_field"
+               value="{{ selected_player_1 }}"><br><br>
+
+        <form class="center" action="/add_1_player_1" method="POST">
+            <input type="Submit" value="+" class="button-plus-minus">
+        </form>
+
+        <form class="center" action="/minus_1_player_1" method="POST">
+            <input type="Submit" value="-" class="button-plus-minus">
+        </form>
+
+    </div>
+
+    <div class="align_forms_label">
+
+        <label for="player_2_field" class="top-title">Player 2 : </label>
+        <input class="top-title" type="text" id="player_2_field" name="player_2_field"
+               value="{{ selected_player_2 }}"><br><br>
+
+        <form class="center" action="/add_1_player_2" method="POST">
+            <input type="Submit" value="+" class="button-plus-minus">
+        </form>
+
+        <form class="center" action="/minus_1_player_2" method="POST">
+            <input type="Submit" value="-" class="button-plus-minus">
+        </form>
+
+    </div>
+
 </div>
 
-    <form class="center" action="/confirm_next_game" method="POST" style="display: inline-block">
-        <input type="Submit" value="CONFIRM NEXT GAME" class="button-76">
-    </form>
+<form class="center" action="/confirm_next_game" method="POST" style="display: inline-block">
+    <input type="Submit" value="CONFIRM NEXT GAME" class="button-76">
+</form>
 
-    <form class="center" action="/swap_name_OBS" method="POST" style="display: inline-block">
-        <input type="Submit" value="SWAP players" class="button-76">
-    </form>
+<form class="center" action="/swap_name_OBS" method="POST" style="display: inline-block">
+    <input type="Submit" value="SWAP players" class="button-76">
+</form>
 <form id="my_form" method="POST">
     <input type="hidden" id="selected_row" name="selected_row">
     <table>

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player1
+from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player_1, obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2
 import pandas as pd
 import pickle
 from Generate_DICT_from_query import *
@@ -14,8 +14,6 @@ def load_data_from_PKL_2_DICT():
     with open('data_lp_3.pkl', 'rb') as f:
         matchs = pickle.load(f)
     return matchs
-
-
 
 
 @app.route('/table', methods=['GET', 'POST'])
@@ -61,8 +59,25 @@ def get_csv():
     return redirect(url_for("show_table"))
 
 
-# @app.route('/add_1_player1', methods=['POST', 'GET'])
-# def confirm_next_game():
-#     obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
-#
-#     return redirect(url_for("show_table"))
+@app.route('/add_1_player_1', methods=['POST', 'GET'])
+def add_1_player_1():
+    obs_add_1_player_1()
+    return redirect(url_for("show_table"))
+
+
+@app.route('/minus_1_player_1', methods=['POST', 'GET'])
+def minus_1_player_1():
+    obs_minus_1_player_1()
+    return redirect(url_for("show_table"))
+
+
+@app.route('/add_1_player_2', methods=['POST', 'GET'])
+def add_1_player_2():
+    obs_add_1_player_2()
+    return redirect(url_for("show_table"))
+
+
+@app.route('/minus_1_player_2', methods=['POST', 'GET'])
+def minus_1_player_2():
+    obs_minus_1_player_2()
+    return redirect(url_for("show_table"))
