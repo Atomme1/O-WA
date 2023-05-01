@@ -1,6 +1,6 @@
 # GG_scoreboard
 GG_scoreboard is an easy to use scoreboard web app for OBS that changes name of players and scores.
-
+It also does API calls to StartGG to get the matches to be played\
 I developped it for my association USDEM ESPORT 404.
 
 
