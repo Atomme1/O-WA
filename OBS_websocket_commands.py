@@ -67,8 +67,10 @@ def obs_do_swap_of_players():
     try:
         # scenes = ws.call(requests.GetSceneList())
         # print(scenes)
-
+        # swap players NAMES
         swap_text_sources(ws, _source1_name, _source2_name)
+        # swap players SCORES
+        swap_text_sources(ws, _source4_name, _source5_name)
 
         # ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source="textTestAPI", text="Hello, world!"))
 

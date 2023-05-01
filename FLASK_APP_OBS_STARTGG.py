@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player_1, obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2
-import pandas as pd
 import pickle
 from Generate_DICT_from_query import *
 import time
