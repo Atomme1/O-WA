@@ -37,13 +37,13 @@ Then use ```pip install -r requirements.txt``` to install the dependencies
 
 ### Installing
 Step-by-step instructions on how to install this project.
-Watch the video below :)
+Watch the video below :)\
+(coming soon)
 
 ## Useful links
 
 The main librairy used is PySmashGG :https://pypi.org/project/pysmashgg/
 
-The external software I use for keeping up with the score of the players: 
+The external software I used for keeping up with the score of the players: 
 https://obsproject.com/forum/resources/another-scoreboard-application.827/ \
 This simple scoreboard application allows me to load a CSV of the matches to be played.
-With this 
