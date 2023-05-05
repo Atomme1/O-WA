@@ -15,7 +15,7 @@ def load_data_from_PKL_2_DICT():
     return matchs
 
 
-@app.route('/table', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def show_table():
     matchs = load_data_from_PKL_2_DICT()
     if request.method == 'POST':
