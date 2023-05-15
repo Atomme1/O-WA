@@ -27,7 +27,7 @@ def get_pkl_of_matches():
     fullEntrant2Name = []
 
     for i in range(0, 10):
-        sets = smash.tournament_show_sets("let-s-play-iii", "1v1-smash-ultimate", i)
+        sets = smash.tournament_show_sets("let-s-play-iv", "1v1-smash-ultimate", i)
 
         for set in sets:
             # print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
