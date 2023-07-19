@@ -1,13 +1,13 @@
 import time
 import obswebsocket
-from obswebsocket import obsws, requests  # noqa: E402
+from obswebsocket import obsws, requests
 import json
 
 with open('TOKEN_OBS_WEB-SOCKET.txt', 'r') as file:
     password = file.read().rstrip()
 
 with open('IPV4.txt', 'r') as file:
-    IPv4 = file.read().rstrip()
+    IPV4 = file.read().rstrip()
 
 ## VARIABLE
 """
@@ -26,7 +26,7 @@ _source5_name = "SCORE_DROITE"
 
 
 # # Connect to the OBS Studio WebSocket server
-# ws = obswebsocket.obsws(IPv4, 4444, password)
+# ws = obswebsocket.obsws("localhost", 4444, password)
 # ws.connect()
 
 def swap_text_sources(ws, source1_name, source2_name):
@@ -46,7 +46,7 @@ def swap_text_sources(ws, source1_name, source2_name):
 
 
 def rename_players(source1_name, source2_name, source1_text, source2_text):
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
 
     ws.call(obswebsocket.requests.SetTextGDIPlusProperties(source=source1_name, text=source2_text))
@@ -62,7 +62,7 @@ def rename_players_and_match(ws, source1_name, source2_name, source3_name, sourc
 
 def obs_do_swap_of_players():
     # Set the contents of a text file in OBS Studio
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -87,7 +87,7 @@ def reset_scores(ws, _source4_name, _source5_name):
 
 
 def obs_confirm_next_game(source1_text, source2_text, source3_text):
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -121,7 +121,7 @@ def minus_1_player(ws, source_name):
 
 
 def obs_add_1_player_1():
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -138,7 +138,7 @@ def obs_add_1_player_1():
 
 
 def obs_add_1_player_2():
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -155,7 +155,7 @@ def obs_add_1_player_2():
 
 
 def obs_minus_1_player_1():
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -172,7 +172,7 @@ def obs_minus_1_player_1():
 
 
 def obs_minus_1_player_2():
-    ws = obswebsocket.obsws(IPv4, 4444, password)
+    ws = obswebsocket.obsws("localhost", 4444, password)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())

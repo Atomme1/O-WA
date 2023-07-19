@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from OBS_websocket_commands import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player_1, obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2
+from OBS_websocket_commands_v2 import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player_1, obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2
 import pickle
 from Generate_DICT_from_query import *
 import time

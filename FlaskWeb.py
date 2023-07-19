@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 import test
 from Generate_DICT_from_query import *
-from OBS_websocket_commands import obs_do_swap_of_players
+from OBS_websocket_commands_v2 import obs_do_swap_of_players
 import pandas as pd
 import time
 
