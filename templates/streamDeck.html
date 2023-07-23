@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OBS StreamDeck</title>
+    <link rel="stylesheet" href="../static/styles/TableStyleSheet.css">
+
+</head>
+<body>
+<h1>Bienvenue sur le StreamDeck with Flask</h1>
+
+<h1>Dynamically generated Buttons</h1>
+{% for button_name in button_names %}
+    <a href="{{ url_for('button_route', value=button_name) }}">
+        <button class="button-76">{{ button_name }}</button>
+    </a>
+{% endfor %}
+
+
+<form class="center" action="/go2table" method="POST" >
+    <input type="Submit" value="Go to Table of Matches" class="button-76">
+</form>
+
+</body>
+</html>

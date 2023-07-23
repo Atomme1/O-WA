@@ -191,3 +191,34 @@ def obs_minus_1_player_2():
         pass
     # Disconnect from the WebSocket server
     ws.disconnect()
+
+
+def obs_get_all_scenes():
+    global scenes_obs
+    scene_names = []
+    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws.connect()
+    try:
+        scenes_obs = ws.call(requests.GetSceneList())
+        print(scenes_obs)
+        for s in scenes_obs.getScenes():
+            scene_names.append(s['sceneName'])
+        # here we reverse the list because OBS when doing GetSceneList does a FIFO so the first
+        # scene will be the last on your list
+        scene_names = reversed(scene_names)
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+    return scene_names
+
+
+def obs_switch2scene(scene):
+    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws.connect()
+    try:
+        ws.call(requests.SetCurrentProgramScene(sceneName=scene))
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from OBS_websocket_commands_v2 import obs_do_swap_of_players, rename_players, obs_confirm_next_game, obs_add_1_player_1, obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2
+from OBS_websocket_commands_v2 import obs_do_swap_of_players, obs_confirm_next_game, obs_add_1_player_1, \
+    obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes
 import pickle
 from Generate_DICT_from_query import *
 import time
@@ -28,7 +29,7 @@ def show_table():
         session['selected_player_1'] = Selected_player_1
         session['selected_player_2'] = Selected_player_2
         # return 'Selected row processed'
-    # Retrieve the name and age from the session
+    # Retrieve the name of player and matches from the session
     _selected_match = session.get('selected_match', '')
     _selected_player_1 = session.get('selected_player_1', '')
     _selected_player_2 = session.get('selected_player_2', '')
@@ -80,3 +81,24 @@ def add_1_player_2():
 def minus_1_player_2():
     obs_minus_1_player_2()
     return redirect(url_for("show_table"))
+
+
+# switching html pages
+@app.route('/go2streamDeck', methods=['POST', 'GET'])
+def go2streamDeck():
+    list_scenes = obs_get_all_scenes()
+    return render_template("streamDeck.html", button_names=list_scenes)
+
+@app.route('/go2table', methods=['POST', 'GET'])
+def go2table():
+    return redirect(url_for("show_table"))
+
+
+@app.route('/button/<value>')
+def button_route(value):
+    obs_switch2scene(value)
+    return redirect(url_for("go2streamDeck"))
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
