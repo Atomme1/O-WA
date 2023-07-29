@@ -1,6 +1,6 @@
-# GG_scoreboard
-GG_scoreboard is an easy to use scoreboard web app for OBS that changes name of players and scores.
-It also does API calls to StartGG to get the matches to be played\
+# What is O-WA ?
+O-WA (OBS Web App) is an easy to use Scoreboard and Streamdeck web app for OBS that changes name of players, scores and scenes.
+It does API calls to StartGG to get the matches yet to be played\
 I developped it for my association USDEM 404.
 
 
@@ -13,7 +13,7 @@ With OBS Docks there is no need to !!\
 Because you will access your application through an URL which can be host locally
 
 Using <b>Python</b>, <b>Flask</b>, <b>PySmashGG</b>, <b>obswebsocket</b> and a little of <b>HTML / CSS / JS</b> you can have a local website 
-making API calls to a python program that either does a websocket call to OBS to change names and scores or another API call (with PySmashGG) to 
+making API calls to a python program that either does a websocket call to OBS to change names, scores and scenes or another API call (with PySmashGG) to 
 StartGG that generate a DICT of the matches to be played.
 #### Add the web app using the docks functionality of OBS
 ![Screenshot](image_for_readMe/overview1.png)
@@ -43,7 +43,7 @@ Watch the video below :)\
 ## Useful links
 
 The main librairy used is PySmashGG :https://pypi.org/project/pysmashgg/
-
+OBS-Websocket documentation https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md
 The external software I used for keeping up with the score of the players: 
 https://obsproject.com/forum/resources/another-scoreboard-application.827/ \
 This simple scoreboard application allows me to load a CSV of the matches to be played.
