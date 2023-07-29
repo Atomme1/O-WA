@@ -5,22 +5,26 @@
     <meta charset="UTF-8">
     <title>OBS StreamDeck</title>
     <link rel="stylesheet" href="../static/styles/TableStyleSheet.css">
+    <link rel="icon" type="image/ico" href="/static/O-WA logo.png">
 
 </head>
 <body>
-<h1>Bienvenue sur le StreamDeck with Flask</h1>
+<h1>StreamDeck with Flask</h1>
 
-<h1>Dynamically generated Buttons</h1>
+<h3>Dynamically generated Buttons</h3>
 {% for button_name in button_names %}
-    <a href="{{ url_for('button_route', value=button_name) }}">
-        <button class="button-76">{{ button_name }}</button>
-    </a>
+    <span>
+        <a href="{{ url_for('button_route', value=button_name) }}">
+            <button class="button-streamdeck">{{ button_name }}</button>
+        </a>
+    </span>
 {% endfor %}
 
-
-<form class="center" action="/go2table" method="POST" >
-    <input type="Submit" value="Go to Table of Matches" class="button-76">
-</form>
+<div class="align_forms_label" style="padding: 15px">
+    <form class="center" action="/go2table" method="POST">
+        <input type="Submit" value="Go to Table of Matches" class="button-76">
+    </form>
+</div>
 
 </body>
 </html>

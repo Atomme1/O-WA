@@ -1,4 +1,6 @@
 # What is O-WA ?
+![Screenshot](static/O-WA logo.png)
+
 O-WA (OBS Web App) is an easy to use Scoreboard and Streamdeck web app for OBS that changes name of players, scores and scenes.
 It does API calls to StartGG to get the matches yet to be played\
 I developped it for my association USDEM 404.
@@ -26,7 +28,7 @@ StartGG that generate a DICT of the matches to be played.
 
 ### Prerequisites
 You need to have a Python 3.8+ (i did not test it for older version)\
-Clone the repo using ```git clone https://github.com/Atomme1/GG_scoreboard.git``` \
+Clone the repo using ```git clone https://github.com/Atomme1/O-WA.git``` \
 Then use ```pip install -r requirements.txt``` to install the dependencies
 - Flask
 - PySmashGG

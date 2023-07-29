@@ -89,6 +89,7 @@ def go2streamDeck():
     list_scenes = obs_get_all_scenes()
     return render_template("streamDeck.html", button_names=list_scenes)
 
+
 @app.route('/go2table', methods=['POST', 'GET'])
 def go2table():
     return redirect(url_for("show_table"))
@@ -99,6 +100,12 @@ def button_route(value):
     obs_switch2scene(value)
     return redirect(url_for("go2streamDeck"))
 
+# Load Browser Favorite Icon
+@app.route('/favicon.ico')
+def favicon():
+    return url_for('static', filename='static/O-WA logo.png')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
+

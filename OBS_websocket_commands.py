@@ -11,6 +11,8 @@ with open('IPV4.txt', 'r') as file:
 
 ## VARIABLE
 """
+Disclaimer : This file works with OBS-WEBSOCKET 4.X.X use the newest version cause it's already built in OBS
+
 You are forced to  e x p l i c i t l y  write down every source of OBS you will modify
 
 To make things things easier for you, every functions in this project are not connected to each other

@@ -29,10 +29,6 @@ _source5_name = "SCORE_DROITE"
 IPv4 = "localhost"
 
 
-# # Connect to the OBS Studio WebSocket server
-# ws = obswebsocket.obsws(IPv4, 4455, password)
-# ws.connect()
-
 def swap_text_sources(ws, source1_name, source2_name):
     # Get the current text contents of the two sources
     id_source1 = ws.call(obswebsocket.requests.GetSceneItemId(sceneName="IN GAME", sourceName=source1_name))
