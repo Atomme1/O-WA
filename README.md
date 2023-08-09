@@ -1,5 +1,5 @@
 # What is O-WA ?
-![Screenshot](static/O-WA logo.png)
+![Screenshot](image_for_readMe/O-WA_logo_alpha.png)
 
 O-WA (OBS Web App) is an easy to use Scoreboard and Streamdeck web app for OBS that changes name of players, scores and scenes.
 It does API calls to StartGG to get the matches yet to be played\
