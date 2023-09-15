@@ -12,6 +12,8 @@ import pickle
 # Do quick a math of how many matches is there to be played and the number of pages you will input.
 # 18*2 = 36 sets so you range must be 2 if you want all the matches from WinnerRound1
 
+NAME_OF_TOURNAMENT = "igny-games-day"
+NAME_OF_EVENT = "1v1-smash-ultimate"
 def print_hi(name):
     print(f'Hi, {name}')
 
@@ -27,7 +29,7 @@ def get_pkl_of_matches():
     fullEntrant2Name = []
 
     for i in range(0, 5):
-        sets = smash.tournament_show_sets("let-s-play-v", "1v1-smash-ultimate", i)
+        sets = smash.tournament_show_sets(NAME_OF_TOURNAMENT,NAME_OF_EVENT , i)
 
         for set in sets:
             # print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
