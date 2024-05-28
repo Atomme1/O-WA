@@ -42,6 +42,10 @@ Step-by-step instructions on how to install this project.
 Watch the video below :)\
 (coming soon)
 
+### Run it like a pro
+```
+flask --app .\FLASK_APP_OBS_STARTGG.py run --host=0.0.0.0 
+```
 ## Useful links
 
 The main librairy used is PySmashGG :https://pypi.org/project/pysmashgg/
