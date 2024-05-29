@@ -26,6 +26,10 @@ _source2_name = "JOUEUR_DROITE"
 _source3_name = "ROUND_TOURNOI"
 _source4_name = "SCORE_GAUCHE"
 _source5_name = "SCORE_DROITE"
+_source6_name = "NOM_CONF_1"
+_source7_name = "NOM_CONF_2"
+_source8_name = "NOM_CONF_3"
+
 IPv4 = "localhost"
 
 
@@ -55,6 +59,10 @@ def rename_players(source1_name, source2_name, source1_text, source2_text):
     ws.disconnect()
 
 
+'''
+This function is used to change the text of 3 selected text field, so for the matches it's for 2 players and the name
+of the match AND for the table ronde it's for changing 3 text that have the same text (it's for the echo effect on OBS)
+'''
 def rename_players_and_match(ws, source1_name, source2_name, source3_name, source1_text, source2_text, source3_text):
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source1_name, inputSettings={"text": source1_text}))
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source2_name, inputSettings={"text": source2_text}))
@@ -105,17 +113,15 @@ def obs_confirm_next_game(source1_text, source2_text, source3_text):
     ws.disconnect()
 
 
-def obs_confirm_next_guest(source1_text):
+def obs_confirm_next_guest(guest_text):
     ws = obswebsocket.obsws("localhost", 4455, password)
     ws.connect()
+    print(guest_text)
     try:
         # scenes = ws.call(requests.GetSceneList())
         # print(scenes)
-
-        rename_guest(ws, _source1_name, _source2_name, _source3_name, source1_text, source2_text,
-                                 source3_text)
-        reset_scores(ws, _source4_name, _source5_name)
-        # ws.call(obswebsocket.requests.GetInputSettings(source="textTestAPI", text="Hello, world!"))
+        rename_players_and_match(ws, _source6_name, _source7_name, _source8_name, guest_text, guest_text,
+                                 guest_text)
 
     except KeyboardInterrupt:
         pass

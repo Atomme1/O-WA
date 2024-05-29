@@ -1,7 +1,8 @@
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands_v2 import obs_do_swap_of_players, obs_confirm_next_game, obs_add_1_player_1, \
-    obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes
+    obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes, \
+    obs_confirm_next_guest
 import pickle
 from Generate_DICT_from_query import *
 import time
@@ -22,7 +23,7 @@ def load_data_from_csv_2_DICT() -> list:
     df_guest = pd.read_excel("data_guest.xlsx", index_col=False)
     print(df_guest)
     list_guest = []
-    for index,row in df_guest.iterrows():
+    for index, row in df_guest.iterrows():
         print(row["Guest"])
         list_guest.append({"Guest": row["Guest"]})
     print(list_guest)
@@ -82,7 +83,7 @@ def confirm_next_game():
 
 @app.route('/confirm_next_guest', methods=['POST', 'GET'])
 def confirm_next_guest():
-    obs_confirm_next_game(session['selected_guest'], "", "")
+    obs_confirm_next_guest(session['selected_guest'])
 
     return redirect(url_for("show_table_ronde"))
 
