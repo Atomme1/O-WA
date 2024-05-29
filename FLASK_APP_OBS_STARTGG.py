@@ -1,3 +1,4 @@
+import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands_v2 import obs_do_swap_of_players, obs_confirm_next_game, obs_add_1_player_1, \
     obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes
@@ -16,13 +17,26 @@ def load_data_from_PKL_2_DICT():
     return matchs
 
 
+# I forgor that the format was a List of Dict (～￣▽￣)～
+def load_data_from_csv_2_DICT() -> list:
+    df_guest = pd.read_excel("data_guest.xlsx", index_col=False)
+    print(df_guest)
+    list_guest = []
+    for index,row in df_guest.iterrows():
+        print(row["Guest"])
+        list_guest.append({"Guest": row["Guest"]})
+    print(list_guest)
+    return list_guest
+
+
 @app.route('/', methods=['GET', 'POST'])
 def show_table():
     matchs = load_data_from_PKL_2_DICT()
+    print(matchs)
     if request.method == 'POST':
         # Get row from table in html
         selected_row = request.form['selected_row']
-        # Split the selected row data into name and age
+        # Split the selected row data into match, player1name and player2name
         Match, Selected_player_1, Selected_player_2 = selected_row.split(';;')
         # Store the match, player1name and player2name in the session
         session['selected_match'] = Match
@@ -39,11 +53,38 @@ def show_table():
                            selected_player_1=_selected_player_1, selected_player_2=_selected_player_2)
 
 
+@app.route('/table_ronde', methods=['GET', 'POST'])
+def show_table_ronde():
+    dict_guest = load_data_from_csv_2_DICT()
+    print(dict_guest)
+    if request.method == 'POST':
+        # Get row from table in html
+        selected_row = request.form['selected_row']
+        # Split the selected row data into Guest
+        Guest = selected_row.split(';;')
+        # Store the Guest in the session
+        session['selected_guest'] = Guest
+        # session['selected_guest'] = selected_row
+        # return 'Selected row processed'
+    # Retrieve the name of player and matches from the session
+    _selected_guest = session.get('selected_guest', '')
+    # rename_players("textTestAPI", "textTestAPI_2", _selected_player_1, _selected_player_2)
+
+    return render_template('Table_ronde.html', data=dict_guest, selected_guest=_selected_guest)
+
+
 @app.route('/confirm_next_game', methods=['POST', 'GET'])
 def confirm_next_game():
     obs_confirm_next_game(session['selected_player_1'], session['selected_player_2'], session['selected_match'])
 
     return redirect(url_for("show_table"))
+
+
+@app.route('/confirm_next_guest', methods=['POST', 'GET'])
+def confirm_next_guest():
+    obs_confirm_next_game(session['selected_guest'], "", "")
+
+    return redirect(url_for("show_table_ronde"))
 
 
 @app.route('/swap_name_OBS', methods=['POST', 'GET'])
@@ -90,6 +131,11 @@ def go2streamDeck():
     return render_template("streamDeck.html", button_names=list_scenes)
 
 
+@app.route('/go2tableRonde', methods=['POST', 'GET'])
+def go2tableRonde():
+    return redirect(url_for("show_table_ronde"))
+
+
 @app.route('/go2table', methods=['POST', 'GET'])
 def go2table():
     return redirect(url_for("show_table"))
@@ -100,6 +146,7 @@ def button_route(value):
     obs_switch2scene(value)
     return redirect(url_for("go2streamDeck"))
 
+
 # Load Browser Favorite Icon
 @app.route('/favicon.ico')
 def favicon():
@@ -108,4 +155,3 @@ def favicon():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
-

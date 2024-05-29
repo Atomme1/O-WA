@@ -1,0 +1,68 @@
+<!--Things to do here !!
+So this is just like the table of matches, so you pick a name and click
+confirm the next person to have their name shown on stream.
+This time, i will you a CSV (simpler to add names in it on the go)
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Liste des invités de la table ronde</title>
+    <link rel="stylesheet" href="../static/styles/TableStyleSheet.css">
+    <link rel="icon" type="image/ico" href="/static/O-WA logo.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('tr').click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+                var Guest = $(this).find('td:first').text();
+                $('#selected_row').val(Guest);
+                $('#guest_field').val(Guest);
+                $('#my_form').submit();
+            });
+        });
+    </script>
+</head>
+<body>
+<div style="text-align: left; padding-top: 30px ; padding-left: 30px">
+
+    <label for="guest_field" class="top-title">Guest : {{ selected_guest }}</label>
+    {# <input class="top-title" type="text" id="guest_field" name="guest_field" value="{{ selected_guest }}"><br><br>#}
+
+</div>
+
+<div style="text-align: left; padding-top: 30px ; padding-left: 30px"></div>
+<form class="center" action="/confirm_next_guest" method="POST" style="display: inline-block ; padding-left: 30px">
+    <input type="Submit" value="CONFIRM NEXT GUEST" class="button-76">
+</form>
+
+
+<form id="my_form" method="POST" style="padding: 30px">
+    <input type="hidden" id="selected_row" name="selected_row">
+    <table>
+        <tr>
+            <th>Guest</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{ item['Guest'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+
+<div class="align_forms_label" style="padding: 30px">
+    <form class="center" action="/go2table" method="POST">
+        <input type="Submit" value="Go to Table of Matches" class="button-76">
+    </form>
+
+
+    <form class="center" action="/go2streamDeck" method="POST" style="display: inline-block">
+        <input type="Submit" value="Go to Stream Deck" class="button-76">
+    </form>
+</div>
+
+</body>
+</html>

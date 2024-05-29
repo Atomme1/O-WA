@@ -13,7 +13,7 @@
 
 <h3>Dynamically generated Buttons</h3>
 {% for button_name in button_names %}
-    <span>
+<span>
         <a href="{{ url_for('button_route', value=button_name) }}">
             <button class="button-streamdeck">{{ button_name }}</button>
         </a>
@@ -24,7 +24,12 @@
     <form class="center" action="/go2table" method="POST">
         <input type="Submit" value="Go to Table of Matches" class="button-76">
     </form>
+
+    <form class="center" action="/go2tableRonde" method="POST" style="display: inline-block">
+        <input type="Submit" value="Go to Table Ronde" class="button-76">
+    </form>
 </div>
+
 
 </body>
 </html>

@@ -105,6 +105,24 @@ def obs_confirm_next_game(source1_text, source2_text, source3_text):
     ws.disconnect()
 
 
+def obs_confirm_next_guest(source1_text):
+    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws.connect()
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+
+        rename_guest(ws, _source1_name, _source2_name, _source3_name, source1_text, source2_text,
+                                 source3_text)
+        reset_scores(ws, _source4_name, _source5_name)
+        # ws.call(obswebsocket.requests.GetInputSettings(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
 def add_1_player(ws, source_name):
     source_props = ws.call(obswebsocket.requests.GetInputSettings(inputName=source_name))
     source_text = str(int(source_props.datain['inputSettings']['text']) + 1)  # changed str to int to str
