@@ -19,7 +19,7 @@ def load_data_from_PKL_2_DICT():
 
 
 # I forgor that the format was a List of Dict (～￣▽￣)～
-def load_data_from_csv_2_DICT() -> list:
+def load_data_from_xlsx_2_DICT() -> list:
     df_guest = pd.read_excel("data_guest.xlsx", index_col=False)
     print(df_guest)
     list_guest = []
@@ -56,7 +56,7 @@ def show_table():
 
 @app.route('/table_ronde', methods=['GET', 'POST'])
 def show_table_ronde():
-    dict_guest = load_data_from_csv_2_DICT()
+    dict_guest = load_data_from_xlsx_2_DICT()
     print(dict_guest)
     if request.method == 'POST':
         # Get row from table in html
