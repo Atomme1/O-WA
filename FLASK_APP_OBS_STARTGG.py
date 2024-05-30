@@ -2,7 +2,7 @@ import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands_v2 import obs_do_swap_of_players, obs_confirm_next_game, obs_add_1_player_1, \
     obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes, \
-    obs_confirm_next_guest, obs_hide_unhide_item
+    obs_confirm_next_guest, obs_hide_unhide_item, obs_synthe_in_out
 import pickle
 from Generate_DICT_from_query import *
 import time
@@ -149,6 +149,13 @@ def button_route(value):
 @app.route('/hide_unhide', methods=['POST', 'GET'])
 def button_hide_unhide_item():
     obs_hide_unhide_item()
+    return redirect(url_for("show_table_ronde"))
+
+
+'''This function does hide unhide + confirm next guest'''
+@app.route('/Synthe_IN_OUT', methods=['POST', 'GET'])
+def button_synthe_in_out():
+    obs_synthe_in_out(session['selected_guest'])
     return redirect(url_for("show_table_ronde"))
 
 

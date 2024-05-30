@@ -279,8 +279,6 @@ def set_item_enable_state(ws, scene_name, source_id, status_desired):
 This function hides a source in OBS, (it could be a group OR a single source), if it's hidden it will unhide and vice
 versa
 '''
-
-
 def obs_hide_unhide_item():
     ws = obswebsocket.obsws("localhost", 4455, password)
     ws.connect()
@@ -295,6 +293,30 @@ def obs_hide_unhide_item():
             set_item_enable_state(ws, _scene1_name, item_id, False)
         else:
             set_item_enable_state(ws, _scene1_name, item_id, True)
+
+        # ws.call(obswebsocket.requests.GetInputSettings(source="textTestAPI", text="Hello, world!"))
+
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
+def obs_synthe_in_out(guest_text):
+    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws.connect()
+    print("here")
+    try:
+        rename_players_and_match(ws, _source6_name, _source7_name, _source8_name, guest_text, guest_text,
+                                 guest_text)
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+        item_id = get_item_id(ws, _source9_name)
+        item_status = get_item_enable_state(ws, _scene1_name, item_id)
+
+        set_item_enable_state(ws, _scene1_name, item_id, True)
+        time.sleep(10)
+        set_item_enable_state(ws, _scene1_name, item_id, False)
 
         # ws.call(obswebsocket.requests.GetInputSettings(source="textTestAPI", text="Hello, world!"))
 
