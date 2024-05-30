@@ -2,7 +2,7 @@ import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session
 from OBS_websocket_commands_v2 import obs_do_swap_of_players, obs_confirm_next_game, obs_add_1_player_1, \
     obs_minus_1_player_1, obs_add_1_player_2, obs_minus_1_player_2, obs_switch2scene, obs_get_all_scenes, \
-    obs_confirm_next_guest
+    obs_confirm_next_guest, obs_hide_unhide_item
 import pickle
 from Generate_DICT_from_query import *
 import time
@@ -144,6 +144,12 @@ def go2table():
 def button_route(value):
     obs_switch2scene(value)
     return redirect(url_for("go2streamDeck"))
+
+
+@app.route('/hide_unhide', methods=['POST', 'GET'])
+def button_hide_unhide_item():
+    obs_hide_unhide_item()
+    return redirect(url_for("show_table_ronde"))
 
 
 # Load Browser Favorite Icon

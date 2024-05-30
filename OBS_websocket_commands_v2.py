@@ -29,6 +29,8 @@ _source5_name = "SCORE_DROITE"
 _source6_name = "NOM_CONF_1"
 _source7_name = "NOM_CONF_2"
 _source8_name = "NOM_CONF_3"
+_source9_name = "NOM_CONF"
+_scene1_name = "TABLE RONDE - ITW"
 
 IPv4 = "localhost"
 
@@ -63,6 +65,8 @@ def rename_players(source1_name, source2_name, source1_text, source2_text):
 This function is used to change the text of 3 selected text field, so for the matches it's for 2 players and the name
 of the match AND for the table ronde it's for changing 3 text that have the same text (it's for the echo effect on OBS)
 '''
+
+
 def rename_players_and_match(ws, source1_name, source2_name, source3_name, source1_text, source2_text, source3_text):
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source1_name, inputSettings={"text": source1_text}))
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source2_name, inputSettings={"text": source2_text}))
@@ -132,6 +136,7 @@ def obs_confirm_next_guest(guest_text):
 
 def add_1_player(ws, source_name):
     source_props = ws.call(obswebsocket.requests.GetInputSettings(inputName=source_name))
+
     source_text = str(int(source_props.datain['inputSettings']['text']) + 1)  # changed str to int to str
     # print("Plus 1" + source_text)
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source_name, inputSettings={"text": source_text}))
@@ -239,6 +244,59 @@ def obs_switch2scene(scene):
     ws.connect()
     try:
         ws.call(requests.SetCurrentProgramScene(sceneName=scene))
+    except KeyboardInterrupt:
+        pass
+    # Disconnect from the WebSocket server
+    ws.disconnect()
+
+
+def get_item_id(ws, source_name):
+    source_id_props = ws.call(obswebsocket.requests.GetSceneItemId(sceneName=_scene1_name, sourceName=source_name))
+    source_id = source_id_props.datain['sceneItemId']
+    print("source_id")
+    return source_id
+
+
+def get_item_enable_state(ws, scene_name, source_id):
+    source_state_props = ws.call(obswebsocket.requests.GetSceneItemEnabled(sceneName=scene_name, sceneItemId=source_id))
+    source_state = source_state_props.datain["sceneItemEnabled"]
+    print("source_state")
+    print(source_state)
+    return source_state
+
+
+def set_item_enable_state(ws, scene_name, source_id, status_desired):
+    GetSceneItemEnabled_test = ws.call(obswebsocket.requests.SetSceneItemEnabled(sceneName=scene_name,
+                                                                                 sceneItemId=source_id,
+                                                                                 sceneItemEnabled=status_desired))
+    print("GetSceneItemEnabled_test")
+    print(GetSceneItemEnabled_test)
+    return True
+
+
+'''
+This function hides a source in OBS, (it could be a group OR a single source), if it's hidden it will unhide and vice
+versa
+'''
+
+
+def obs_hide_unhide_item():
+    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws.connect()
+    print("here")
+    try:
+        # scenes = ws.call(requests.GetSceneList())
+        # print(scenes)
+        item_id = get_item_id(ws, _source9_name)
+        item_status = get_item_enable_state(ws, _scene1_name, item_id)
+        if item_status:
+            # It means the boolean is 1 so True
+            set_item_enable_state(ws, _scene1_name, item_id, False)
+        else:
+            set_item_enable_state(ws, _scene1_name, item_id, True)
+
+        # ws.call(obswebsocket.requests.GetInputSettings(source="textTestAPI", text="Hello, world!"))
+
     except KeyboardInterrupt:
         pass
     # Disconnect from the WebSocket server
