@@ -116,6 +116,7 @@ def obs_confirm_next_game(source1_text, source2_text, source3_text):
 def obs_confirm_next_guest(guest_text):
     ws = obswebsocket.obsws("localhost", 4455, password)
     ws.connect()
+    print("Guest_text")
     print(guest_text)
     try:
         # scenes = ws.call(requests.GetSceneList())

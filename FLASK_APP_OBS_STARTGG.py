@@ -49,7 +49,7 @@ def show_table():
     _selected_player_1 = session.get('selected_player_1', '')
     _selected_player_2 = session.get('selected_player_2', '')
     # rename_players("textTestAPI", "textTestAPI_2", _selected_player_1, _selected_player_2)
-
+    print(type(_selected_match))
     return render_template('table.html', data=matchs, selected_match=_selected_match,
                            selected_player_1=_selected_player_1, selected_player_2=_selected_player_2)
 
@@ -61,15 +61,13 @@ def show_table_ronde():
     if request.method == 'POST':
         # Get row from table in html
         selected_row = request.form['selected_row']
-        # Split the selected row data into Guest
-        Guest = selected_row.split(';;')
-        # Store the Guest in the session
-        session['selected_guest'] = Guest
+        session['selected_guest'] = selected_row
         # session['selected_guest'] = selected_row
         # return 'Selected row processed'
     # Retrieve the name of player and matches from the session
     _selected_guest = session.get('selected_guest', '')
     # rename_players("textTestAPI", "textTestAPI_2", _selected_player_1, _selected_player_2)
+    print(type(_selected_guest))
 
     return render_template('Table_ronde.html', data=dict_guest, selected_guest=_selected_guest)
 
