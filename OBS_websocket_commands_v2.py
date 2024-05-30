@@ -30,7 +30,7 @@ _source6_name = "NOM_CONF_1"
 _source7_name = "NOM_CONF_2"
 _source8_name = "NOM_CONF_3"
 _source9_name = "NOM_CONF"
-_scene1_name = "TABLE RONDE - ITW"
+_scene1_name = "TABLE RONDE - TEMPLATE"
 
 IPv4 = "localhost"
 
