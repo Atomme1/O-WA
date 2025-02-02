@@ -1,5 +1,7 @@
-Flask==2.2.3
-pandas==1.5.3
-pysmashgg==1.2.0.1
+Flask
+pandas
 obs-websocket-py
 requests
+tomli
+startggapi
+Pathlib

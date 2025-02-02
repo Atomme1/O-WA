@@ -1,3 +1,3 @@
-/IPV4.txt
-/TOKEN_OBS_WEB-SOCKET.txt
-/TOKEN_STARTGG.txt
+./.venv/*
+./.venv
+./config.toml
