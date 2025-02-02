@@ -11,10 +11,13 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+# To ensure we have a PKL to load otherwise the app doesn't launch
+get_pkl_of_matches()
 
 def load_data_from_PKL_2_DICT():
-    with open('data_lp_3.pkl', 'rb') as f:
+    with open('sets_of_tournament.pkl', 'rb') as f:
         matchs = pickle.load(f)
+        print(f"MATCHS = {matchs}")
     return matchs
 
 
@@ -92,8 +95,8 @@ def swap_name_OBS():
     return redirect(url_for("show_table"))
 
 
-@app.route('/get_csv', methods=['POST', 'GET'])
-def get_csv():
+@app.route('/get_matches', methods=['POST', 'GET'])
+def get_matches():
     get_pkl_of_matches()
     time.sleep(10)
     return redirect(url_for("show_table"))

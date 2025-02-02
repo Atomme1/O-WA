@@ -53,3 +53,16 @@ OBS-Websocket documentation https://github.com/obsproject/obs-websocket/blob/mas
 The external software I used for keeping up with the score of the players: 
 https://obsproject.com/forum/resources/another-scoreboard-application.827/ \
 This simple scoreboard application allows me to load a CSV of the matches to be played.
+
+## config.toml example
+````toml
+[TOKEN_STARTGG]
+start_gg_token = "<YOUR_TOKEN_HERE>"
+
+[OBS_WEBSOCKET]
+pwd_obs = "<YOUR_PWD_HERE>"
+ipv4_obs = "localhost"
+
+[STARTGG_TOURNAMENT_SLUG]
+startgg_slug = "<YOUR_TOURNAMENT-SLUG_HERE>"
+````

@@ -1,52 +1,64 @@
-import pysmashgg
-import pandas as pd
+from startggapi import StartGGAPI
+# from startggapi._apis import TournamentApi
+import tomli
+import pathlib
 import pickle
 
 
-# This code allows you to generate a CSV from pysmashgg functions query and use this CSV inside the ScoreBoard App,
-# it will go through pages, more recent being 0 or 1 to n number of matchs)
-# For example if your tournament has 64 players you will have 32 WinnerRound1 sets to played and the same number for
-# LoserRound1.
-# The variable "perPage" inside the function and the query made by pysmashgg allows to retrieve only 18 sets
-# (if you want more like 37 as I did, go in the code and wiggle around the query and test the limit)
-# Do quick a math of how many matches is there to be played and the number of pages you will input.
-# 18*2 = 36 sets so you range must be 2 if you want all the matches from WinnerRound1
+def dict_clean(_sets: list):
+    """
+    Some games are not ready to be played yet so the value of player['entrant'] is a None
+    so we create its value that is a dict with a key 'name' and the value "undetermined"
+    otherwise it crashes when you want to get it.
+    We create a better dict of sets to fit our existing solution.
+    :param _sets:
+    :return: cleaned sets
+    """
+    fullTextRound = ""
+    player1 = ""
+    player2 = ""
+    list_all_sets = []
+    for _set in _sets:
+        fullTextRound = _set["fullRoundText"]
+        for player in _set['slots']:
+            if player['entrant'] is None:
+                player['entrant'] = {"name": "__undetermined__"}
+        player1 = _set['slots'][0]['entrant']['name']
+        player2 = _set['slots'][1]['entrant']['name']
 
-NAME_OF_TOURNAMENT = "igny-games-day"
-NAME_OF_EVENT = "1v1-smash-ultimate"
-def print_hi(name):
-    print(f'Hi, {name}')
+        list_all_sets.append({"Match": fullTextRound, "Player_1": player1, "Player_2": player2})
+    return list_all_sets
 
 
 def get_pkl_of_matches():
-    with open('TOKEN_STARTGG.txt', 'r') as file:
-        token = file.read().rstrip()
-    smash = pysmashgg.SmashGG(token, True)
+    path_config = pathlib.Path('./config.toml')
+    # print(path_config)
+    with open(path_config, "rb") as f:
+        toml_dict = tomli.load(f)
 
-    fullSetsInTournamentEvent = []
-    fullTextRound = []
-    fullEntrant1Name = []
-    fullEntrant2Name = []
+    startgg_token = toml_dict.get('TOKEN_STARTGG')['start_gg_token']
+    tournament_slug = toml_dict.get('STARTGG_TOURNAMENT_SLUG')['startgg_slug']
 
-    for i in range(0, 5):
-        sets = smash.tournament_show_sets(NAME_OF_TOURNAMENT,NAME_OF_EVENT , i)
+    api = StartGGAPI(startgg_token)
 
-        for set in sets:
-            # print(set['fullRoundText'] + "  player 1: " + set['entrant1Name'] + "  player 2: " + set['entrant2Name'])
-            fullSetsInTournamentEvent.append(set)
-            fullTextRound.append(set['fullRoundText'])
-            fullEntrant1Name.append(set['entrant1Name'])
-            fullEntrant2Name.append(set['entrant2Name'])
-            #print(set)
-    print(len(fullSetsInTournamentEvent))
+    tournoi = api.tournament.find_tournament_by_slug(tournament_slug)
 
-    data_lp = {"Match": fullTextRound, "Player_1": fullEntrant1Name, "Player_2": fullEntrant2Name}
-    df_data_lp = pd.DataFrame(data_lp)
-    # df_data_lp.to_csv("data_lp.csv", sep=';', encoding='utf-8', index=False)
-    matchs = df_data_lp.to_dict(orient='records')
-    print(df_data_lp)
-    with open('data_lp_3.pkl', 'wb') as f:
-        pickle.dump(matchs, f)
+    id_ssbu = tournoi['events'][0]['id']
+
+    sets = api.event.fetch_sets(id_ssbu)
+    """    
+    # name_of_set = sets[0]['fullRoundText']
+    # player_1 = sets[0]['slots'][0]['entrant']['name']
+    # player_2 = sets[0]['slots'][1]['entrant']['name']
+    # print(f"name of set : {name_of_set}")
+    # print(f"name of player 1 : {player_1}")
+    # print(f"name of player 2 : {player_2}")
+    """
+    clean_sets = dict_clean(sets)
+
+    path_pkl = pathlib.Path("./sets_of_tournament.pkl")
+    with open(path_pkl, 'wb') as f:
+        pickle.dump(clean_sets, f)
 
 
 def get_top_8():

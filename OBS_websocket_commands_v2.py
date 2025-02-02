@@ -1,15 +1,14 @@
 import time
-import json
+import tomli
 import obswebsocket
 from obswebsocket import obsws, requests
+import pathlib
 
-with open('TOKEN_OBS_WEB-SOCKET.txt', 'r') as file:
-    password = file.read().rstrip()
+path_config = pathlib.Path('./config.toml')
+with open(path_config, "rb") as f:
+    toml_dict = tomli.load(f)
+pwd_obs = toml_dict.get('OBS_WEBSOCKET')['pwd_obs']
 
-# with open('IPV4.txt', 'r') as file:
-#     IPv4 = file.read().rstrip()
-
-## VARIABLE
 """
 Disclaimer : This file works with OBS-WEBSOCKET 5.X.X
 Go here to see why : https://github.com/obsproject/obs-websocket/discussions/1119
@@ -38,8 +37,6 @@ IPv4 = "localhost"
 
 def swap_text_sources(ws, source1_name, source2_name):
     # Get the current text contents of the two sources
-    id_source1 = ws.call(obswebsocket.requests.GetSceneItemId(sceneName="IN GAME", sourceName=source1_name))
-    print(id_source1.datain['sceneItemId'])
     source1_props = ws.call(obswebsocket.requests.GetInputSettings(inputName=source1_name))
     # print(source1_props.datain['text'])
     source2_props = ws.call(obswebsocket.requests.GetInputSettings(inputName=source2_name))
@@ -54,7 +51,7 @@ def swap_text_sources(ws, source1_name, source2_name):
 
 
 def rename_players(source1_name, source2_name, source1_text, source2_text):
-    ws = obswebsocket.obsws(IPv4, 4455, password)
+    ws = obswebsocket.obsws(IPv4, 4455, pwd_obs)
     ws.connect()
 
     ws.call(obswebsocket.requests.SetInputSettings(inputName=source1_name, inputSettings={"text": source2_text}))
@@ -76,7 +73,7 @@ def rename_players_and_match(ws, source1_name, source2_name, source3_name, sourc
 
 def obs_do_swap_of_players():
     # Set the contents of a text file in OBS Studio
-    ws = obswebsocket.obsws(IPv4, 4455, password)
+    ws = obswebsocket.obsws(IPv4, 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -101,7 +98,7 @@ def reset_scores(ws, _source4_name, _source5_name):
 
 
 def obs_confirm_next_game(source1_text, source2_text, source3_text):
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -119,7 +116,7 @@ def obs_confirm_next_game(source1_text, source2_text, source3_text):
 
 
 def obs_confirm_next_guest(guest_text):
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     print("Guest_text")
     print(guest_text)
@@ -153,7 +150,7 @@ def minus_1_player(ws, source_name):
 
 
 def obs_add_1_player_1():
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -170,7 +167,7 @@ def obs_add_1_player_1():
 
 
 def obs_add_1_player_2():
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -187,7 +184,7 @@ def obs_add_1_player_2():
 
 
 def obs_minus_1_player_1():
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -204,7 +201,7 @@ def obs_minus_1_player_1():
 
 
 def obs_minus_1_player_2():
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         # scenes = ws.call(requests.GetSceneList())
@@ -223,7 +220,7 @@ def obs_minus_1_player_2():
 def obs_get_all_scenes():
     global scenes_obs
     scene_names = []
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         scenes_obs = ws.call(requests.GetSceneList())
@@ -241,7 +238,7 @@ def obs_get_all_scenes():
 
 
 def obs_switch2scene(scene):
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     try:
         ws.call(requests.SetCurrentProgramScene(sceneName=scene))
@@ -280,7 +277,7 @@ This function hides a source in OBS, (it could be a group OR a single source), i
 versa
 '''
 def obs_hide_unhide_item():
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     print("here")
     try:
@@ -303,7 +300,7 @@ def obs_hide_unhide_item():
 
 
 def obs_synthe_in_out(guest_text):
-    ws = obswebsocket.obsws("localhost", 4455, password)
+    ws = obswebsocket.obsws("localhost", 4455, pwd_obs)
     ws.connect()
     print("here")
     try:
