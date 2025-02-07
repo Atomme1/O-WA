@@ -13,9 +13,9 @@
 
 <h3>Dynamically generated Buttons</h3>
 {% for button_name in button_names %}
-<span>
+<span style="margin-top:20px; padding-left:10px; display:inline-block;">
         <a href="{{ url_for('button_route', value=button_name) }}">
-            <button class="button-streamdeck">{{ button_name }}</button>
+            <button class="button-streamdeck" style="padding: 40px">{{ button_name }}</button>
         </a>
     </span>
 {% endfor %}

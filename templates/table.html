@@ -26,13 +26,13 @@
 <div style="text-align: left;">
 
     <label for="match_field" class="top-title">Match : {{ selected_match }}</label>
-    {#    <input class="top-title" type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>#}
+    {# <input class="top-title" type="text" id="match_field" name="match_field" value="{{ selected_match }}"><br><br>#}
 
     <div class="align_forms_label">
 
         <label for="player_1_field" class="top-title">Player 1 : {{ selected_player_1 }} </label>
-        {#        <input class="top-title" type="text" id="player_1_field" name="player_1_field_name"#}
-        {#               value="{{ selected_player_1 }}"><br><br>#}
+        {# <input class="top-title" type="text" id="player_1_field" name="player_1_field_name" #}
+                  {# value="{{ selected_player_1 }}"><br><br>#}
 
         <form class="center" action="/add_1_player_1" method="POST">
             <input type="Submit" value="+" class="button-plus-minus">
@@ -47,8 +47,8 @@
     <div class="align_forms_label">
 
         <label for="player_2_field" class="top-title">Player 2 : {{ selected_player_2 }}</label>
-        {#        <input class="top-title" type="text" id="player_2_field" name="player_2_field_name"#}
-        {#               value="{{ selected_player_2 }}"><br><br>#}
+        {# <input class="top-title" type="text" id="player_2_field" name="player_2_field_name" #}
+                  {# value="{{ selected_player_2 }}"><br><br>#}
 
         <form class="center" action="/add_1_player_2" method="POST">
             <input type="Submit" value="+" class="button-plus-minus">
@@ -69,14 +69,18 @@
 <form class="center" action="/swap_name_OBS" method="POST" style="display: inline-block">
     <input type="Submit" value="SWAP players" class="button-76">
 </form>
-
+<!--<h5 class="top-title">First button is for generating a full Dict of matches</h5>-->
+<form class="center" action="/get_matches" method="POST" style="display: inline-block">
+    <input type="Submit" value="GET SETS" class="button-76">
+</form>
 <form class="center" action="/go2streamDeck" method="POST" style="display: inline-block">
     <input type="Submit" value="Go to Stream Deck" class="button-76">
 </form>
-
 <form class="center" action="/go2tableRonde" method="POST" style="display: inline-block">
     <input type="Submit" value="Go to Table Ronde" class="button-76">
 </form>
+
+
 
 <form id="my_form" method="POST">
     <input type="hidden" id="selected_row" name="selected_row">
@@ -87,30 +91,15 @@
             <th>Player 2</th>
         </tr>
         {% for item in data %}
-            <tr>
-                <td>{{ item['Match'] }}</td>
-                <td>{{ item['Player_1'] }}</td>
-                <td>{{ item['Player_2'] }}</td>
-            </tr>
+        <tr>
+            <td>{{ item['Match'] }}</td>
+            <td>{{ item['Player_1'] }}</td>
+            <td>{{ item['Player_2'] }}</td>
+        </tr>
         {% endfor %}
     </table>
 </form>
 
-<h1 class="top-title">First button is for generating a full Dict of matches</h1>
-<form class="center" action="/get_matches" method="POST">
 
-    <div style="text-align: center;">
-        <input type="Submit" value="GET SETS" class="button-76">
-    </div>
-
-</form>
-
-<h1 class="top-title">Second button is for switching players matches</h1>
-<form class="center" action="/swap_name_OBS" method="POST">
-
-    <div style="text-align: center;">
-        <input type="Submit" value="SWAP players" class="button-76">
-    </div>
-</form>
 </body>
 </html>

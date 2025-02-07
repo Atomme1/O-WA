@@ -2,7 +2,7 @@ html,
 body {
     height: 100%;
     margin: auto;
-    background-color: rgb(92, 2, 119);
+    background-color: #090404;
     font-family: "Exo 2", sans-serif;
     color: white;
     font-weight: 100;
@@ -70,7 +70,7 @@ tbody td:hover:before {
 .button-76 {
     display: inline-block;
     background-color: #cf245f;
-    background-image: linear-gradient(90deg, rgb(34, 66, 195) 0%, rgb(159, 45, 253) 100%);
+    background-image: linear-gradient(45deg, #4c1813, #a81214);
     border: 0;
     border-radius: .25rem;
     box-sizing: border-box;
@@ -90,7 +90,7 @@ tbody td:hover:before {
 
 .button-streamdeck {
     display: flex;
-    background-image: linear-gradient(90deg, rgb(34, 66, 195) 0%, rgb(159, 45, 253) 100%);
+    background-image: linear-gradient(45deg, #4c1813, #a81214);
     border: 0;
     border-radius: .25rem;
     box-sizing: border-box;
@@ -113,7 +113,7 @@ tbody td:hover:before {
 .button-plus-minus {
     display: inline-block;
     background-color: #cf245f;
-    background-image: linear-gradient(90deg, rgb(195, 34, 34) 0%, rgb(245, 210, 5) 100%);
+    background-image: linear-gradient(45deg, #4c1813, #a81214);
     border: 0;
     border-radius: .25rem;
     box-sizing: border-box;
