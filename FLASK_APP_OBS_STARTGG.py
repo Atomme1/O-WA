@@ -98,7 +98,6 @@ def swap_name_OBS():
 @app.route('/get_matches', methods=['POST', 'GET'])
 def get_matches():
     get_pkl_of_matches()
-    time.sleep(10)
     return redirect(url_for("show_table"))
 
 
@@ -155,9 +154,11 @@ def button_hide_unhide_item():
     return redirect(url_for("show_table_ronde"))
 
 
-'''This function does hide unhide + confirm next guest'''
 @app.route('/Synthe_IN_OUT', methods=['POST', 'GET'])
 def button_synthe_in_out():
+    """
+    This function does hide unhide + confirm next guest
+    """
     obs_synthe_in_out(session['selected_guest'])
     return redirect(url_for("show_table_ronde"))
 

@@ -1,3 +1,5 @@
+import time
+
 from startggapi import StartGGAPI
 # from startggapi._apis import TournamentApi
 import tomli
@@ -39,6 +41,8 @@ def get_pkl_of_matches():
     startgg_token = toml_dict.get('TOKEN_STARTGG')['start_gg_token']
     tournament_slug = toml_dict.get('STARTGG_TOURNAMENT_SLUG')['startgg_slug']
 
+    start_time = time.time()
+
     api = StartGGAPI(startgg_token)
 
     tournoi = api.tournament.find_tournament_by_slug(tournament_slug)
@@ -46,6 +50,8 @@ def get_pkl_of_matches():
     id_ssbu = tournoi['events'][0]['id']
 
     sets = api.event.fetch_sets(id_ssbu)
+    end_time = time.time()
+    print(f"delta time IN QUERY = {end_time-start_time}")
     """    
     # name_of_set = sets[0]['fullRoundText']
     # player_1 = sets[0]['slots'][0]['entrant']['name']
