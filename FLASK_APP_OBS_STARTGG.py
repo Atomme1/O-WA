@@ -14,6 +14,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 # To ensure we have a PKL to load otherwise the app doesn't launch
 get_pkl_of_matches()
 
+
 def load_data_from_PKL_2_DICT():
     with open('sets_of_tournament.pkl', 'rb') as f:
         matchs = pickle.load(f)
