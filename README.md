@@ -29,6 +29,7 @@ StartGG that generate a DICT of the matches to be played.
 You need to have a Python 3.13+ (i did not test it for older version)
 - Clone the repo using ```git clone https://github.com/Atomme1/O-WA.git``` 
 - Then use ```pip install -r requirements.txt``` to install the dependencies
+  - **CHECK WIP BELOW !!**
 - Create an account on startgg and create a private token for making API calls.
 - Then you need to create a `config.toml` file containing the informations below
 #### config.toml example
@@ -49,7 +50,15 @@ startgg_link = "<YOUR_TOURNAMENT_LINK_HERE>"
 ```
 flask --app .\FLASK_APP_OBS_STARTGG.py run --host=0.0.0.0 
 ```
+# [WIP] Upgrade on StartGG-API 
+I have forked the StartGG-API repo to add some upgrades like getting the event slug + the IDs of the phases and the pools.
+And get the sets in the pool that are in a phase. e.g. all sets from Pool B301 from phase R1 of ssbu single from genesis-x2
 
+#### If you want this version of lib
+You need to:
+- Clone the StartGG-API I have forked
+- Run the command ```python -m build``` to build the startggapi with the upgrades
+- Then run ```python3 -m pip install .\dist\startggapi-0.1.22-py3-none-any.whl```
 
 ## Useful links
 
