@@ -1,9 +1,17 @@
+import pathlib
 import time
-
+import tomli
 from startggapi.startggapi import *
 
 if __name__ == "__main__":
-    api = StartGGAPI(api_key="859b167984d46cef5f13c8511713d8f0")
+
+    path_config = pathlib.Path('./config.toml')
+    # print(path_config)
+    with open(path_config, "rb") as f:
+        toml_dict = tomli.load(f)
+
+    startgg_token = toml_dict.get('TOKEN_STARTGG')['start_gg_token']
+    api = StartGGAPI(api_key=startgg_token)
     # res_heavy = api.tournament.find_events_by_tournament_slug_heavy(tourney_slug="let-s-play-iv-2")
     res_heavy = api.tournament.find_events_by_tournament_slug_heavy(tourney_slug="genesis-x2")
     print(res_heavy)
