@@ -1,7 +1,9 @@
+build
 Flask
-pandas
 obs-websocket-py
-requests
-tomli
+openpyxl
+pandas
+pathlib
+pipdeptree
 startggapi
-Pathlib
+tomli
